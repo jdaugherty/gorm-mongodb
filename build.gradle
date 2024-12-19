@@ -92,12 +92,12 @@ subprojects { Project subproject ->
             implementation "jakarta.servlet:jakarta.servlet-api"
             testImplementation "jakarta.annotation:jakarta.annotation-api"
             testImplementation "io.micrometer:micrometer-core:latest.integration"
-            testImplementation "org.hibernate:hibernate-validator:$hibernateValidatorVersion"
+            testImplementation "org.hibernate:hibernate-validator"
             testImplementation "org.apache.groovy:groovy-test-junit5"
             testImplementation "org.spockframework:spock-core", { transitive = false }
-            testImplementation "org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion"
-            testImplementation "org.junit.platform:junit-platform-runner:$junitJupiterPlatformVersion"
-            testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion"
+            testImplementation "org.junit.jupiter:junit-jupiter-api"
+            testImplementation "org.junit.platform:junit-platform-runner"
+            testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
         }
 
         tasks.withType(Test) {
@@ -202,9 +202,9 @@ subprojects { Project subproject ->
         testImplementation "org.apache.groovy:groovy-templates"
         testImplementation "org.apache.groovy:groovy-test-junit5"
         testImplementation "org.spockframework:spock-core", { transitive = false }
-        testImplementation "org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion"
-        testImplementation "org.junit.platform:junit-platform-runner:$junitJupiterPlatformVersion"
-        testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion"
+        testImplementation "org.junit.jupiter:junit-jupiter-api"
+        testImplementation "org.junit.platform:junit-platform-runner"
+        testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
     }
 
     publishing {
