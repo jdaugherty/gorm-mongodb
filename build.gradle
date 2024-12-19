@@ -71,11 +71,6 @@ allprojects {
 }
 
 subprojects { Project subproject ->
-
-    ext['gorm.version'] = datastoreVersion
-    ext['junit-jupiter.version'] = junitJupiterVersion
-    ext['mongodb.version'] = mongodbDriverVersion
-
     if (project.name.startsWith("examples")) {
 
         apply plugin: 'groovy'
