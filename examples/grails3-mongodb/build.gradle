@@ -37,8 +37,6 @@ dependencies {
     testImplementation "org.spockframework:spock-core"
 
     testImplementation "org.testcontainers:mongodb:$testcontainersMongodbVersion"
-
-    integrationTestImplementation testFixtures('org.grails.plugins:geb')
 }
 
 

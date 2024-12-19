@@ -17,7 +17,7 @@ dependencies {
     
     testImplementation "org.grails:grails-datastore-gorm-tck:$datastoreVersion"
     testImplementation "org.grails:grails-gorm-testing-support"
-    testImplementation "org.hibernate:hibernate-validator"
+    testImplementation "org.hibernate.validator:hibernate-validator"
     testImplementation "org.grails:grails-datastore-gorm-support", {
         exclude group: "org.grails", module:"grails-datastore-gorm-hibernate-core"
     }

@@ -92,7 +92,7 @@ subprojects { Project subproject ->
             implementation "jakarta.servlet:jakarta.servlet-api"
             testImplementation "jakarta.annotation:jakarta.annotation-api"
             testImplementation "io.micrometer:micrometer-core:latest.integration"
-            testImplementation "org.hibernate:hibernate-validator"
+            testImplementation "org.hibernate.validator:hibernate-validator"
             testImplementation "org.apache.groovy:groovy-test-junit5"
             testImplementation "org.spockframework:spock-core", { transitive = false }
             testImplementation "org.junit.jupiter:junit-jupiter-api"
