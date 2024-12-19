@@ -81,8 +81,6 @@ subprojects { Project subproject ->
             apply plugin:"org.grails.grails-gsp"
         }
 
-        boolean usesGeb = project.name.contains('grails3-hibernate5-mongodb') || project.name.contains('grails3-mongodb') || project.name.contains('grails3-mongodb-database-per-tenant')|| project.name.contains('grails3-rxmongodb')
-
         if (project.name == "examples-test-data-service") {
             apply plugin:"org.grails.grails-web"
         }
