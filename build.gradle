@@ -87,8 +87,6 @@ subprojects { Project subproject ->
 
         dependencies {
             implementation platform("org.grails:grails-bom:$grailsVersion")
-            implementation "jakarta.servlet:jakarta.servlet-api"
-            testImplementation "jakarta.annotation:jakarta.annotation-api"
             testImplementation "io.micrometer:micrometer-core:latest.integration"
             testImplementation "org.hibernate.validator:hibernate-validator"
             testImplementation "org.apache.groovy:groovy-test-junit5"
