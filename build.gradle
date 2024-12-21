@@ -67,6 +67,16 @@ allprojects {
             }
         }
 //        mavenLocal() // do not commit uncommented, for local testing only
+        if (System.getenv("GITHUB_MAVEN_PASSWORD") && !grailsVersion.endsWith('-SNAPSHOT')) {
+            System.out.println("Adding Grails Core Repo for ${project.name}")
+            maven {
+                url = 'https://maven.pkg.github.com/grails/grails-core'
+                credentials {
+                    username = 'DOES_NOT_MATTER'
+                    password = System.getenv("GITHUB_MAVEN_PASSWORD")
+                }
+            }
+        }
     }
 }
 
@@ -86,7 +96,6 @@ subprojects { Project subproject ->
         }
 
         dependencies {
-            implementation platform("org.grails:grails-bom:$grailsVersion")
             testImplementation "io.micrometer:micrometer-core:latest.integration"
             testImplementation "org.hibernate.validator:hibernate-validator"
             testImplementation "org.apache.groovy:groovy-test-junit5"
@@ -311,8 +320,9 @@ class PublishingConvention {
             name = 'rx-mongodb'
             projectName = 'RxGORM for MongoDB'
         }
-        else if(name == 'json-templates') {
-            projectName = 'JSON Views Templates'
+        else if(name.endsWith('json-templates')) {
+            projectName = 'Grails Views'
+            projectDescription = "Provides JSON Views for MongoDB to the Grails framework."
         }
         projectArtifactId = name
     }

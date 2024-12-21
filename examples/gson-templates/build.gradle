@@ -8,6 +8,7 @@ plugins {
 group = 'functional.tests'
 
 dependencies {
+    implementation platform("org.grails:grails-bom:$grailsVersion")
 
     implementation 'org.grails.plugins:views-json'
     implementation 'org.grails.plugins:views-markup'

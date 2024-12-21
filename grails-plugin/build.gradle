@@ -18,7 +18,8 @@ dependencies {
     }
     api project(":grails-datastore-gorm-mongodb-ext"), {
         exclude group:'org.grails', module:'grails-datastore-gorm-mongodb'
-    }    
+        exclude group:'org.grails', module:'grails-bom'
+    }
     api project(":grails-datastore-gorm-mongodb"), {
         exclude group:'org.springframework', module:'spring-context'
         exclude group:'org.springframework', module:'spring-core'
