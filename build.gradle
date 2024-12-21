@@ -182,10 +182,9 @@ subprojects { Project subproject ->
         apply plugin:"org.grails.plugins.views-json"
     }
 
+    compileJava.options.release = 17
+
     java {
-        toolchain {
-            languageVersion = JavaLanguageVersion.of(17)
-        }
         withJavadocJar()
         withSourcesJar()
     }
@@ -304,14 +303,17 @@ class PublishingConvention {
     PublishingConvention(Project project) {
         this.project = project
 
-        def name = project.name
+        String name = project.name
         if(name.startsWith('grails') && name.endsWith('-plugin')) {
             name = 'mongodb'
         }
-        if(name.startsWith('rx') && name.endsWith('-plugin')) {
+        else if(name.startsWith('rx') && name.endsWith('-plugin')) {
             name = 'rx-mongodb'
             projectName = 'RxGORM for MongoDB'
-        }        
+        }
+        else if(name == 'json-templates') {
+            projectName = 'JSON Views Templates'
+        }
         projectArtifactId = name
     }
 }
