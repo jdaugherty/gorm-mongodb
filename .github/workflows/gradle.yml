@@ -26,7 +26,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          distribution: temurin
+          distribution: liberica
           java-version: '17'
       - name: Start MongoDB
         uses: supercharge/mongodb-github-action@1.11.0
@@ -36,6 +36,7 @@ jobs:
         uses: gradle/gradle-build-action@v3
         env:
           GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
+          GITHUB_MAVEN_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
         with:
           arguments: build
   publish:
@@ -49,7 +50,7 @@ jobs:
     - name: Set up JDK
       uses: actions/setup-java@v4
       with:
-        distribution: temurin
+        distribution: liberica
         java-version: '17'
     - name: Publish to repo.grails.org
       id: publish
@@ -78,7 +79,7 @@ jobs:
         if_false: ${{ github.repository }}
     - name: Publish to Github Pages
       if: steps.docs.outcome == 'success'
-      uses: micronaut-projects/github-pages-deploy-action@master
+      uses: grails/github-pages-deploy-action@main
       env:
         TARGET_REPOSITORY: ${{ steps.docs_target.outputs.value }}
         GH_TOKEN: ${{ secrets.GH_TOKEN }}

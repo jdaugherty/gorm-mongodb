@@ -5,6 +5,7 @@ plugins {
 group "examples"
 
 dependencies {
+    implementation platform("org.grails:grails-bom:$grailsVersion")
 
     implementation project(":grails-plugin")
     implementation "org.mongodb:mongodb-driver-sync"

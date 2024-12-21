@@ -12,6 +12,8 @@ buildscript {
 apply plugin: "java"
 
 dependencies {
+    implementation platform("org.grails:grails-bom:$grailsVersion")
+
     implementation "org.grails:grails-plugin-codecs"
     implementation "org.grails:grails-plugin-datasource"
     implementation "org.grails.plugins:cache"
