@@ -15,7 +15,7 @@ dependencies {
     }
     compileOnly "jakarta.servlet:jakarta.servlet-api"
     
-    testImplementation "org.grails:grails-datastore-gorm-tck:$datastoreVersion"
+    testImplementation "org.grails:grails-datastore-gorm-tck"
     testImplementation "org.grails:grails-gorm-testing-support"
     testImplementation "org.hibernate.validator:hibernate-validator"
     testImplementation "org.grails:grails-datastore-gorm-support", {
