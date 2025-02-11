@@ -16,20 +16,15 @@ import spock.lang.Specification
  */
 @Integration(applicationClass = Application)
 class BookSpec extends Specification {
+
     @Autowired
     MongoDatastore mongoDatastore
 
     void "Test database per tenant"() {
         setup:
-        mongoDatastore.mongoClient.listDatabaseNames().forEach(dbName-> {
-            try {
-                if (name != 'admin') {
-                    mongoDatastore.mongoClient.getDatabase(dbName).drop()
-                }
-            } catch(e) {
-                // continue and ignore, probably permission issue
-            }
-        })
+        mongoDatastore.mongoClient.listDatabaseNames().findAll { it != 'admin' }.each { dbName ->
+            mongoDatastore.mongoClient.getDatabase(dbName).drop()
+        }
 
         when:"A query is executed"
         Book.list()
@@ -68,9 +63,7 @@ class BookSpec extends Specification {
         then:"The count is correct"
         Book.count == 0
 
-
         cleanup:
         System.setProperty(SystemPropertyTenantResolver.PROPERTY_NAME, "")
-
     }
 }
