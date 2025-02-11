@@ -81,8 +81,8 @@ abstract class MongoSpec extends Specification {
         if (!domainClasses) {
             def packageToScan = getPackageToScan(config)
             MongoClient mongoClient = createMongoClient()
-            def pkg = Package.getPackage(packageToScan)
-            if(pkg == null) {
+            def pkg = getClass().classLoader.getDefinedPackage(packageToScan)
+            if (pkg == null) {
                 throw new ConfigurationException("Package to scan [$packageToScan] cannot be found on the classpath")
             }
 
