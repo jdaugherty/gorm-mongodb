@@ -1,4 +1,4 @@
-name: Java CI
+name: "Java CI"
 on:
   push:
     branches:
@@ -13,79 +13,84 @@ on:
         required: true
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     continue-on-error: true
+    permissions:
+      contents: read
+      packages: read
     env:
-      WORKSPACE: ${{ github.workspace }}
       GRADLE_OPTS: -Xmx1500m -Dfile.encoding=UTF-8
     strategy:
       matrix:
-        mongodb-version: ['4.4', '5.0', '6.0', '7.0.14' ]
+        mongodb-version: ['4.4', '5.0', '6.0', '7.0.14']
     steps:
-      - uses: actions/checkout@v4
-      - name: Set up JDK
+      - name: "📥 Checkout repository"
+        uses: actions/checkout@v4
+      - name: "☕️ Setup JDK"
         uses: actions/setup-java@v4
         with:
+          java-version: 17
           distribution: liberica
-          java-version: '17'
-      - name: Start MongoDB
-        uses: supercharge/mongodb-github-action@1.11.0
+      - name: "🐘 Setup Gradle"
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          develocity-access-key: ${{ secrets.DEVELOCITY_ACCESS_KEY }}
+      - name: "▶️ Start MongoDB (needed for some tests)"
+        uses: supercharge/mongodb-github-action@90004df786821b6308fb02299e5835d0dae05d0d # v1.12.0 (Use commit sha as this is a 3rd party action)
         with:
           mongodb-version: ${{ matrix.mongodb-version }}
-      - name: Run Build
-        uses: gradle/gradle-build-action@v3
+      - name: "🔨 Run Build"
         env:
-          GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
           GITHUB_MAVEN_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          arguments: build
+        run: ./gradlew build --continue
   publish:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      packages: read
     if: github.event_name == 'push'
-    needs: [build]
-    env:
-      WORKSPACE: ${{ github.workspace }}
+    needs: build
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up JDK
-      uses: actions/setup-java@v4
-      with:
-        distribution: liberica
-        java-version: '17'
-    - name: Publish to repo.grails.org
-      id: publish
-      uses: gradle/gradle-build-action@v3
-      env:
-        GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
-        ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
-        ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
-      with:
-        arguments: -Dorg.gradle.internal.publish.checksums.insecure=true publish
-    - name: Build Docs
-      id: docs
-      if: steps.build.outcome == 'success'
-      uses: gradle/gradle-build-action@v3
-      env:
-        GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
-      with:
-        arguments: docs:docs
-    - name: Determine docs target repository
-      if: steps.docs.outcome == 'success'
-      uses: haya14busa/action-cond@v1
-      id: docs_target
-      with:
-        cond: ${{ github.repository == 'grails/gorm-mongodb' }}
-        if_true: "grails/grails-data-mapping"
-        if_false: ${{ github.repository }}
-    - name: Publish to Github Pages
-      if: steps.docs.outcome == 'success'
-      uses: grails/github-pages-deploy-action@main
-      env:
-        TARGET_REPOSITORY: ${{ steps.docs_target.outputs.value }}
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        BRANCH: gh-pages
-        FOLDER: docs/build/docs
-        DOC_SUB_FOLDER: mongodb
-        DOC_FOLDER: gh-pages
-        COMMIT_EMAIL: 'grails-build@users.noreply.github.com'
-        COMMIT_NAME: 'grails-build'
+      - name: "📥 Checkout repository"
+        uses: actions/checkout@v4
+      - name: "☕️ Setup JDK"
+        uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: liberica
+      - name: "🐘 Setup Gradle"
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          develocity-access-key: ${{ secrets.DEVELOCITY_ACCESS_KEY }}
+      - name: "📤 Publish Snapshot to repo.grails.org"
+        id: publish
+        env:
+          GITHUB_MAVEN_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+          GRAILS_PUBLISH_RELEASE: 'false'
+        run: ./gradlew publish
+      - name: "🔨 Build Docs"
+        id: docs
+        if: steps.build.outcome == 'success'
+        env:
+          GITHUB_MAVEN_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+        run: ./gradlew docs:docs
+      - name: "Determine docs target repository"
+        if: steps.docs.outcome == 'success'
+        uses: haya14busa/action-cond@94f77f7a80cd666cb3155084e428254fea4281fd # v1.2.1 (Use commit sha as this is a 3rd party action)
+        id: docs_target
+        with:
+          cond: ${{ github.repository == 'grails/gorm-mongodb' }}
+          if_true: grails/grails-data-mapping
+          if_false: ${{ github.repository }}
+      - name: "📤 Publish to Github Pages"
+        if: steps.docs.outcome == 'success'
+        uses: grails/github-pages-deploy-action@f1bddf4d126e4375529c0f397b028eb5ac9a13e6 # 2024-12-22
+        env:
+          BRANCH: gh-pages
+          COMMIT_EMAIL: grails-build@users.noreply.github.com
+          COMMIT_NAME: grails-build
+          DOC_FOLDER: gh-pages
+          DOC_SUB_FOLDER: mongodb
+          FOLDER: docs/build/docs
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          TARGET_REPOSITORY: ${{ steps.docs_target.outputs.value }}
