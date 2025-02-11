@@ -20,7 +20,6 @@ import org.grails.datastore.mapping.model.types.Embedded;
 import org.grails.datastore.mapping.model.types.ToOne;
 import org.grails.datastore.mapping.proxy.ProxyHandler;
 import org.grails.datastore.mapping.query.Query;
-import org.grails.datastore.mapping.query.Restrictions;
 import org.grails.datastore.mapping.reflect.EntityReflector;
 import org.springframework.dao.InvalidDataAccessResourceUsageException;
 

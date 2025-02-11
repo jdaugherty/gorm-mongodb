@@ -5,7 +5,6 @@ import org.grails.datastore.mapping.core.Session;
 import org.grails.datastore.mapping.core.SessionImplementor;
 import org.grails.datastore.mapping.engine.*;
 import org.grails.datastore.mapping.model.*;
-import org.grails.datastore.mapping.model.config.GormProperties;
 import org.grails.datastore.mapping.model.types.Association;
 import org.grails.datastore.mapping.model.types.Identity;
 import org.grails.datastore.mapping.model.types.ManyToMany;

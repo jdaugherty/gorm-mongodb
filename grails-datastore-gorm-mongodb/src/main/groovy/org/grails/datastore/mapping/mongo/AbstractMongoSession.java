@@ -1,4 +1,4 @@
-/* Copyright (C) 2015 original authors
+/* Copyright (C) 2015-2025 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@ import org.bson.Document;
 import org.grails.datastore.mapping.core.AbstractSession;
 import org.grails.datastore.mapping.core.impl.PendingOperation;
 import org.grails.datastore.mapping.document.config.DocumentMappingContext;
-import org.grails.datastore.mapping.engine.EntityAccess;
 import org.grails.datastore.mapping.model.MappingContext;
 import org.grails.datastore.mapping.model.PersistentEntity;
 import org.grails.datastore.mapping.mongo.config.MongoCollection;

@@ -1,15 +1,12 @@
 package functional.tests
 
-import com.mongodb.Block
 import grails.gorm.multitenancy.Tenants
 import grails.testing.mixin.integration.Integration
-
 import org.grails.datastore.mapping.mongo.MongoDatastore
 import org.grails.datastore.mapping.multitenancy.exceptions.TenantNotFoundException
 import org.grails.datastore.mapping.multitenancy.resolvers.SystemPropertyTenantResolver
 import org.springframework.beans.factory.annotation.Autowired
 import spock.lang.Specification
-
 
 /**
  * Created by graemerocher on 17/10/16.
