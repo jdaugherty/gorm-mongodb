@@ -17,14 +17,11 @@ import org.springframework.transaction.PlatformTransactionManager
 class MongodbGrailsPlugin extends Plugin {
     def license = 'Apache 2.0 License'
     def organization = [name: 'Grails', url: 'https://grails.org/']
-    def developers = [[name: 'Puneet Behl', email: 'behlp@objectcomputing.com']]
     def issueManagement = [system: 'Github', url: 'https://github.com/grails/gorm-mongodb']
     def scm = [url: 'https://github.com/grails/gorm-mongodb']
     def grailsVersion = '7.0.0 > *'
     def observe = ['services', 'domainClass']
     def loadAfter = ['domainClass', 'hibernate5', 'hibernate6', 'services']
-    def author = 'Puneet Behl'
-    def authorEmail = 'behlp@objectcomputing.com'
     def title = 'GORM MongoDB'
     def description = 'A plugin that integrates the MongoDB document datastore into the Grails framework, providing a GORM API onto it'
     def documentation = 'https://gorm.grails.org/latest/mongodb/manual'
