@@ -2,11 +2,9 @@ package org.grails.datastore.gorm.mongodb.boot.autoconfigure
 
 import grails.gorm.annotation.Entity
 import org.springframework.boot.autoconfigure.AutoConfigurationPackages
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.boot.autoconfigure.context.PropertyPlaceholderAutoConfiguration
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
 import org.springframework.context.annotation.AnnotationConfigApplicationContext
-import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Import
 import spock.lang.Specification
@@ -14,7 +12,7 @@ import spock.lang.Specification
 /**
  * Tests for MongoDB autoconfigure
  */
-class MongoDbGormAutoConfigurationSpec extends Specification{
+class MongoDbGormAutoConfigurationSpec extends Specification {
 
     protected AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
 
@@ -39,8 +37,6 @@ class MongoDbGormAutoConfigurationSpec extends Specification{
     }
 
     @Configuration
-    @EnableAutoConfiguration
-    @ComponentScan("org.grails.datastore.gorm.mongodb.boot.autoconfigure")
     @Import(MongoDbGormAutoConfiguration)
     static class TestConfiguration {
     }
