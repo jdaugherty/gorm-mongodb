@@ -64,7 +64,7 @@ jobs:
           if_false: ${{ github.repository }}
       - name: "📤 Publish to Github Pages"
         if: success()
-        uses: grails/github-pages-deploy-action@f1bddf4d126e4375529c0f397b028eb5ac9a13e6 # 2024-12-22
+        uses: grails/github-pages-deploy-action@v3
         env:
           BETA: ${{ contains(steps.release_version.outputs.release_version, 'M') || contains(steps.release_version.outputs.release_version, 'RC') }}
           BRANCH: gh-pages
