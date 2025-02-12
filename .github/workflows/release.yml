@@ -27,7 +27,7 @@ jobs:
         id: release_version
         run: echo "value=${GITHUB_REF:11}" >> $GITHUB_OUTPUT
       - name: "⚙️ Run pre-release"
-        uses: grails/github-actions/pre-release@15e3017e73c5c4bfdc02c36792da171418da563f # 2024-12-22
+        uses: grails/github-actions/pre-release@v3
       - name: "🔐 Generate key file for artifact signing"
         env:
           SECRING_FILE: ${{ secrets.SECRING_FILE }}
@@ -53,7 +53,7 @@ jobs:
           GITHUB_MAVEN_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
         run: ./gradlew docs:docs
       - name: "🛫 Export Gradle Properties"
-        uses: grails/github-actions/export-gradle-properties@15e3017e73c5c4bfdc02c36792da171418da563f # 2024-12-22
+        uses: grails/github-actions/export-gradle-properties@v3
       - name: "🔍 Determine docs target repository"
         if: success()
         uses: haya14busa/action-cond@94f77f7a80cd666cb3155084e428254fea4281fd # v1.2.1 (Use commit sha as this is a 3rd party action)
@@ -78,4 +78,4 @@ jobs:
           VERSION: ${{ steps.release_version.outputs.release_version }}
       - name: "⚙️ Run post-release"
         if: success()
-        uses: grails/github-actions/post-release@15e3017e73c5c4bfdc02c36792da171418da563f # 2024-12-22
+        uses: grails/github-actions/post-release@v3
