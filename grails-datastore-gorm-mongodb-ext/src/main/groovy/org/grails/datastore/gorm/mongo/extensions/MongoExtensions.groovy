@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 original authors
+ * Copyright 2015-2025 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,23 +16,16 @@
 package org.grails.datastore.gorm.mongo.extensions
 
 import com.mongodb.BasicDBObject
-import com.mongodb.CursorType
 import com.mongodb.DBObject
-import com.mongodb.MongoNamespace
-import com.mongodb.ReadConcern
 import com.mongodb.ReadPreference
 import com.mongodb.WriteConcern
-import com.mongodb.bulk.BulkWriteResult
 import com.mongodb.client.*
 import com.mongodb.client.model.*
 import com.mongodb.client.result.DeleteResult
-import com.mongodb.client.result.InsertManyResult
-import com.mongodb.client.result.InsertOneResult
 import com.mongodb.client.result.UpdateResult
 import com.mongodb.lang.Nullable
 import groovy.transform.CompileStatic
 import org.bson.Document
-import org.bson.codecs.configuration.CodecRegistry
 import org.bson.conversions.Bson
 import org.bson.types.ObjectId
 import org.grails.datastore.gorm.GormEnhancer
@@ -42,10 +35,7 @@ import org.grails.datastore.mapping.mongo.engine.AbstractMongoObectEntityPersist
 import org.grails.datastore.mapping.mongo.engine.MongoEntityPersister
 import org.grails.datastore.mapping.mongo.query.MongoQuery
 
-import java.util.concurrent.TimeUnit
-
 import static java.util.Arrays.asList
-import static java.util.concurrent.TimeUnit.MILLISECONDS
 
 /**
  * Extra methods for MongoDB API

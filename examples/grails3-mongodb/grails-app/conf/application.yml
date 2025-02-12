@@ -1,21 +1,13 @@
----
-grails:
-    profile: web
-    codegen:
-        defaultPackage: "functional.tests"
 info:
     app:
         name: '@info.app.name@'
         version: '@info.app.version@'
         grailsVersion: '@info.app.grailsVersion@'
-spring:
-  groovy:
-        template:
-            check-template-location: false
-  main:
-    allow-circular-references: true
 ---
 grails:
+  profile: web
+  codegen:
+    defaultPackage: functional.tests
   gorm:
     failOnError: true
   mongodb:
@@ -59,8 +51,6 @@ grails:
     urlmapping:
         cache:
             maxsize: 1000
-    controllers:
-        defaultScope: singleton
     converters:
         encoding: UTF-8
     views:

@@ -1,7 +1,6 @@
 package org.grails.datastore.bson.codecs.encoders
 
 import groovy.transform.CompileStatic
-import groovy.transform.PackageScope
 import org.bson.BsonWriter
 import org.bson.Document
 import org.bson.codecs.Codec

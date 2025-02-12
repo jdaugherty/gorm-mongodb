@@ -24,7 +24,7 @@
       "matchPackageNames": [
         "org.grails:grails-datastore-core",
         "org.grails:grails-datastore-web",
-        "org.grails:grails-datastore-aync",
+        "org.grails:grails-datastore-async",
         "org.grails:grails-datastore-gorm",
         "org.grails:grails-datastore-gorm-support",
         "org.grails:grails-datastore-gorm-async",

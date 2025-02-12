@@ -1,4 +1,4 @@
-/* Copyright (C) 2010 SpringSource
+/* Copyright (C) 2010-2025 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ import groovy.transform.CompileStatic
 import groovy.transform.builder.Builder
 import groovy.transform.builder.SimpleStrategy
 import org.grails.datastore.mapping.config.Entity
-import org.grails.datastore.mapping.config.Property
 import org.grails.datastore.mapping.document.config.Attribute
 import org.grails.datastore.mapping.document.config.Collection
 import org.grails.datastore.mapping.query.Query
